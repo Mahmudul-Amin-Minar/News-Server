@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+        {% for obj in news %}
+            <div class="row">
+                <div class="col s12 l4">
+                    <div class="card small hoverable">
+                        <div class="card-image">
+                            <img class="responsive-img" src="{{ obj.img_link }}" alt="img">
+                        </div>
+                        <div class="card-stacked">
+                        <div class="card-content">
+                            <h6><a href="{{ obj.link }}">{{ obj.title }}</a></h6>
+                        </div>
+                        <div class="card-action">
+                            <small class="badge white-text black new right">{{ obj.source_name }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
