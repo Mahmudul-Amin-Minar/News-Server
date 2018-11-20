@@ -7,6 +7,7 @@ from .models import News
 requests.packages.urllib3.disable_warnings()
 
 
+# samakal news data collection
 def samakal(url):
     url = url
     html_doc = req.urlopen(url)
@@ -48,6 +49,7 @@ def samakal(url):
             new_news.save()
 
 
+# priyo news data collection
 def priyo(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
@@ -69,8 +71,37 @@ def priyo(url):
             new_news.source_name = 'প্রিয় সংবাদ'
             new_news.source_slug = 'Priyo'
             new_news.title = title.text
-            new_news.link = link.find('a').get('href')
+            new_news.link = "https://www.priyo.com" + str(link.find('a').get('href'))
             new_news.img_link = link.find('img')['src']
             new_news.category_slug = category_slug
 
             new_news.save()
+
+
+# prothon alo news data collection
+def palo(url):
+    page = requests.get(url)
+    news = BeautifulSoup(page.text, 'html.parser')
+
+    for title, link, img, category in zip(news.find_all('h2', class_='title_holder'),
+                                          news.find_all('a', attrs={'class': 'link_overlay'}),
+                                          news.find_all('div', class_='image'),
+                                          news.find_all('a', class_='category aitm')):
+
+        if News.objects.filter(title=title.text).exists():
+            continue
+        else:
+            category_slug = category.text
+            new_news = News()
+            new_news.source_name = 'প্রথম আলো'
+            new_news.source_slug = 'ProthomAlo'
+            new_news.title = title.text
+            link2 = link.get('href')
+            new_news.link = "https://www.prothomalo.com/" + str(link2)
+            lnk = img.find('img')
+            new_news.img_link = "http:" + str(lnk['src'])
+            new_news.category_slug = category_slug
+
+            new_news.save()
+
+
