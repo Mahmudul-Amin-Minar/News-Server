@@ -47,3 +47,30 @@ def samakal(url):
 
             new_news.save()
 
+
+def priyo(url):
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+
+    news_list = soup.find_all('div', class_='pr-4 mc-10')
+
+    for x in news_list:
+        titles = x.find_all('h4')
+        links = x.find_all('div', class_='article-image')
+        tags = x.find_all('div', class_='article-description')
+
+    for title, link, tag in zip(titles, links, tags):
+
+        if News.objects.filter(title=title.text).exists():
+            continue
+        else:
+            category_slug = tag.find('a').text
+            new_news = News()
+            new_news.source_name = 'প্রিয় সংবাদ'
+            new_news.source_slug = 'Priyo'
+            new_news.title = title.text
+            new_news.link = link.find('a').get('href')
+            new_news.img_link = link.find('img')['src']
+            new_news.category_slug = category_slug
+
+            new_news.save()

@@ -3,11 +3,13 @@ from django.views.generic import ListView
 
 from .models import News
 from .scraper import samakal
+from .scraper import priyo
 
 
 def scrape_news(request):
     url = "http://samakal.com/list/all"
     samakal(url)
+    priyo("https://www.priyo.com/")
     return redirect('/')
 
 

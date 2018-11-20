@@ -9,6 +9,7 @@ class News(models.Model):
     title = models.CharField(max_length=555)
     link = models.TextField()
     img_link = models.TextField(blank=True, null=True)
+    news_date = models.TextField(blank=True)
 
     def __str__(self):
         return str(self.source_name) + '-' + str(self.title)
