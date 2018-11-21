@@ -17,12 +17,9 @@ def scrape_news(request):
     samakal(url)
     priyo("https://www.priyo.com/")
     palo("https://www.prothomalo.com/home/featured")
-<<<<<<< HEAD
-    return redirect(reverse('news-list'))
-=======
     kalerkonto("http://www.kalerkantho.com/")
-    return redirect('/')
->>>>>>> upstream/master
+    return redirect(reverse('news-list'))
+
 
 
 class NewsListView(ListView):
