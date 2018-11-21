@@ -10,6 +10,10 @@ class News(models.Model):
     link = models.TextField()
     img_link = models.TextField(blank=True, null=True)
     news_date = models.TextField(blank=True)
+    added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-added',)
 
     def __str__(self):
         return str(self.source_name) + '-' + str(self.title)

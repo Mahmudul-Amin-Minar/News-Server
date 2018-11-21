@@ -13,7 +13,6 @@
     <title>News</title>
     <style>
 
-
     </style>
 </head>
 <body>
@@ -26,5 +25,24 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                format: 'yyyy/mm/dd',
+            });
+
+            $('#date').change(function () {
+                var date = document.getElementById('date').value;
+                var year = Number(date.split('/')[0]);
+                var month = Number(date.split('/')[1]);
+                var day = Number(date.split('/')[2]);
+                console.log(day);
+                window.location = (`http://127.0.0.1:8000/archive/${year}/${month}/${day}/`);
+                console.log('after refresh');
+                date.value = date;
+            })
+        });
+    </script>
 </body>
 </html>
