@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+    <div class="container">
+        <h3>{{ day }}</h3>
+        <div class="row">
+            <div class="col s12 l3">
+                
+            </div>
+            <div class="col s12 l9">
+                {% for obj in object_list %}
+                    <div class="col s12 l3">
+                        <div class="card small hoverable">
+                            <div class="card-image">
+                                <img class="responsive-img" src="{{ obj.img_link }}" alt="img">
+                            </div>
+                            <div class="card-content">
+                                <h6><a href="{{ obj.link }}">{{ obj.title }}</a></h6>
+                            </div>
+                            <div class="card-action">
+                                <small class="badge white-text black new right">{{ obj.source_name }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <p>
+        {% if previous_day %}
+            Previous Day: {{ previous_day }}
+        {% endif %}
+        {% if previous_day and next_day %}--{% endif %}
+        {% if next_day %}
+            Next Day: {{ next_day }}
+        {% endif %}
+    </p>
+{% endblock %}

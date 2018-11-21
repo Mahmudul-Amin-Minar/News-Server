@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block body %}
+    <ul>
+        {% for article in latest %}
+            <li>{{ article.added }}: {{ article.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
