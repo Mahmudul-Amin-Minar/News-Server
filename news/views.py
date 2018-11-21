@@ -1,5 +1,7 @@
 import datetime
 from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views import View
 from django.views.generic import ListView
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, DayArchiveView, ArchiveIndexView
 
@@ -15,8 +17,12 @@ def scrape_news(request):
     samakal(url)
     priyo("https://www.priyo.com/")
     palo("https://www.prothomalo.com/home/featured")
+<<<<<<< HEAD
+    return redirect(reverse('news-list'))
+=======
     kalerkonto("http://www.kalerkantho.com/")
     return redirect('/')
+>>>>>>> upstream/master
 
 
 class NewsListView(ListView):
@@ -58,3 +64,14 @@ class NewsDayArchiveView(DayArchiveView):
     month_format = '%m'
     context_object_name = 'news'
     template_name = 'news/news_list.html'
+
+
+class NewsSearch(View):
+
+    def post(self, request):
+        search_text = request.POST.get('search')
+        if search_text:
+            results = News.objects.filter(title__icontains=search_text).distinct()
+        else:
+            results = ['No Items found']
+        return render(request, 'news/ajax_search.html', {'results': results})
