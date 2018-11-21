@@ -1,0 +1,7 @@
+{% for result in results %}
+    {% if result %}
+        <a href="{{ result.link }}" class="collection-item">{{ result.title }}</a>
+    {% else %}
+        <p class="collection-item"></p>
+    {% endif %}
+{% endfor %}

@@ -12,7 +12,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <title>News</title>
     <style>
+        .nav-wrapper form{
+            margin: auto;
+            width: 50%;
+        }
 
+        .nav-wrapper .input-field{
+            padding-top: 7px;
+        }
+
+        .nav-wrapper form #search{
+            height: 50px;
+        }
+
+
+        nav .right img{
+            margin: 17px;
+            height: 30px;
+            width: 30px;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+
+        nav .right .imgProfil a{
+            height: 64px;
+        }
+
+        .hidden{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -41,6 +69,21 @@
                 window.location = (`http://127.0.0.1:8000/archive/${year}/${month}/${day}/`);
                 console.log('after refresh');
                 date.value = date;
+            });
+
+            $('#search').keyup(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "news-search" %}',
+                    data: {
+                        'search': $('#search').val(),
+                        'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+                    },
+                    success: function (data) {
+                        $('#search-results').html(data)
+                    }
+
+                })
             })
         });
     </script>
