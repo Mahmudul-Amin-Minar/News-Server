@@ -105,3 +105,57 @@ def palo(url):
             new_news.save()
 
 
+def kalerkonto(url):
+    page = req.urlopen(url)
+    soup = BeautifulSoup(page, 'html.parser')
+
+    news_list = soup.find_all('div', class_='col-xs-12 home-top-news')
+
+    for x in news_list:
+        info = x.find_all('div', class_='col-xs-6')
+
+    i = 0
+
+    for title in info:
+        if News.objects.filter(title=title.find('h2').text).exists():
+            continue
+        else:
+            new_news = News()
+            new_news.source_name = 'কালের কণ্ঠ'
+            new_news.source_slug = 'KalerKonto'
+            new_news.title = title.find('h2').text
+            links = (title.find_all('a'))
+            lnk = links[-1].get('href')
+            if i == 0:
+                new_news.link = "http://www.kalerkantho.com/" + str(lnk[1:])
+            else:
+                new_news.link = "http://www.kalerkantho.com/" + str(lnk)
+            img_link = title.find('img')
+            new_news.img_link = img_link['src']
+            category = lnk.split('/')
+            if i == 0:
+                category_slug = category[2]
+            else:
+                category_slug = category[1]
+            new_news.category_slug = category_slug
+
+            if category_slug == 'Politics':
+                new_news.category_name = 'রাজনীতি'
+            elif category_slug == 'international':
+                new_news.category_name = 'আন্তর্জাতিক'
+            elif category_slug == 'national':
+                new_news.category_name = 'বাংলাদেশ'
+            elif category_slug == 'economics':
+                new_news.category_name = 'অর্থনীতি'
+            elif category_slug == 'entertainment':
+                new_news.category_name = 'বিনোদন'
+            elif category_slug == 'sport':
+                new_news.category_name = 'খেলা'
+            elif category_slug == 'probas':
+                new_news.category_name = 'প্রবাস'
+            else:
+                new_news.category_name = 'বিবিধ'
+
+            new_news.save()
+            i = i + 1
+

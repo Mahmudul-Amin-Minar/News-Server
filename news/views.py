@@ -4,7 +4,8 @@ from django.views.generic import ListView
 from .models import News
 from .scraper import samakal
 from .scraper import priyo
-from  .scraper import palo
+from .scraper import palo
+from .scraper import kalerkonto
 
 
 def scrape_news(request):
@@ -12,6 +13,7 @@ def scrape_news(request):
     samakal(url)
     priyo("https://www.priyo.com/")
     palo("https://www.prothomalo.com/home/featured")
+    kalerkonto("http://www.kalerkantho.com/")
     return redirect('/')
 
 
