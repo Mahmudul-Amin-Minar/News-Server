@@ -6,12 +6,14 @@ from django.views.generic.dates import YearArchiveView, MonthArchiveView, DayArc
 from .models import News
 from .scraper import samakal
 from .scraper import priyo
+from  .scraper import palo
 
 
 def scrape_news(request):
     url = "http://samakal.com/list/all"
     samakal(url)
     priyo("https://www.priyo.com/")
+    palo("https://www.prothomalo.com/home/featured")
     return redirect('/')
 
 
