@@ -6,16 +6,17 @@
         </a>
         <ul class="right hide-on-med-and-down">
             <li><a href="#">Contact</a></li>
-            <li><a href="#" class="tooltipped btn-floating btn-small transparent z-depth-0" data-tooltip="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a></li>
-            <li><a href="#" class="tooltipped btn-floating btn-small transparent z-depth-0" data-tooltip="Facebook">
-                <i class="fab fa-facebook"></i>
-            </a></li>
-            <li><a href="#" class="tooltipped btn-floating btn-small transparent z-depth-0" data-tooltip="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a></li>
         </ul>
+        <form class="right" action="{% url 'news-search' %}" method="post">
+            {% csrf_token %}
+            <div class="input-field right">
+                <input id="search" name="search" type="search" required>
+                <label class="label-icon" for="search">
+                    <i class="material-icons left">search</i>
+                </label>
+                <div class="collection" id="search-results"></div>
+            </div>
+        </form>
         <ul class="sidenav grey lighten-2" id="mobile-menu">
             <li><a href="#">Contact</a></li>
         </ul>
