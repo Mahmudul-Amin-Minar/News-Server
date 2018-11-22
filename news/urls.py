@@ -12,6 +12,7 @@ urlpatterns = [
     re_path('search/$', views.NewsSearch.as_view(), name='news-search'),
 
     path('archive/<int:year>/', views.NewsYearArchiveView.as_view(), name="news_year_archive"),
-    path('archive/<int:year>/<int:month>/', views.NewsMonthArchiveView.as_view(month_format='%m'), name="news_month_archive"),
+    path('archive/<int:year>/<int:month>/', views.NewsMonthArchiveView.as_view(month_format='%m'),
+         name="news_month_archive"),
     path('archive/<int:year>/<int:month>/<int:day>/', views.NewsDayArchiveView.as_view(), name="news_day_archive"),
 ]
