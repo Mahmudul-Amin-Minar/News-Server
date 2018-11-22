@@ -1,4 +1,5 @@
 import datetime
+import random
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -19,7 +20,6 @@ def scrape_news(request):
     palo("https://www.prothomalo.com/home/featured")
     kalerkonto("http://www.kalerkantho.com/")
     return redirect(reverse('news-list'))
-
 
 
 class NewsListView(ListView):
