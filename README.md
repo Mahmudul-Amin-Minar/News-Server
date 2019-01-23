@@ -1,1 +1,4 @@
-Practise Sessions on Django 2
+# Django News Scraper
+
+### Home Page.
+
